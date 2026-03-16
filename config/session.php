@@ -131,7 +131,7 @@ return [
         'SESSION_COOKIE',
         Str::slug(env('APP_NAME', 'laravel'), '_') . '_session'
     ),
-
+'csrf_cookie' => env('CSRF_COOKIE_NAME', 'XSRF-TOKEN'),
     /*
     |--------------------------------------------------------------------------
     | Session Cookie Path

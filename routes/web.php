@@ -1,19 +1,17 @@
 <?php
 
-use App\Http\Controllers\DemoController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-$app_name = env('APP_NAME', '');
+Route::get('/login',          [AuthController::class, 'loginForm'])->name('sso.login');
+Route::post('/login',         [AuthController::class, 'login'])->name('sso.login.post');
+Route::get('/logout',         [AuthController::class, 'logout'])->name('sso.logout');
+Route::get('/validate-token', [AuthController::class, 'validateToken'])->name('sso.validate');
+Route::get('/check-session',  [AuthController::class, 'checkSession'])->name('sso.check');
 
-// Authentication routes
-require __DIR__ . '/auth.php';
-
-// General routes
-require __DIR__ . '/general.php';
-
-Route::get("/demo", [DemoController::class, 'index'])->name('demo');
-
-Route::fallback(function () {
-    return Inertia::render('404');
-})->name('404');
+// Redirect root to login
+Route::get('/', function () {
+    return redirect()->route('sso.login', [
+        'redirect' => request()->query('redirect')
+    ]);
+});

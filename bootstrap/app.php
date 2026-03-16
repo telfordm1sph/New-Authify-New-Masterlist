@@ -11,12 +11,17 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+
+        // Exempt /login from CSRF — fixes concurrent tab mismatch
+        $middleware->validateCsrfTokens(except: [
+            '/login',
+        ]);
+
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 
-        //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
