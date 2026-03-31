@@ -28,25 +28,7 @@ return [
             ]) : [],
         ],
 
-        'newstore' => [
-            'driver'    => 'mysql',
-            'url'       => null,
-            'host'      => env('SDB_HOST', '127.0.0.1'),
-            'port'      => env('SDB_PORT', '3306'),
-            'database'  => env('SDB_DATABASE', 'newstore_aj'),
-            'username'  => env('SDB_USERNAME', 'root'),
-            'password'  => env('SDB_PASSWORD', ''),
-            'unix_socket' => '',
-            'charset'   => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix'    => '',
-            'prefix_indexes' => true,
-            'strict'    => true,
-            'engine'    => null,
-            'options'   => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
+
 
         'masterlist' => [
             'driver'    => 'mysql',
